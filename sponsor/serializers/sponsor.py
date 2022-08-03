@@ -52,3 +52,6 @@ class SponsorListSerializer(serializers.ModelSerializer):
             'sponsor_status'
             # spent_money
         ]
+
+
+__all__ = ['NewSponsorSerializer', 'SponsorProfileSerializer', 'SponsorListSerializer', 'SponsorUpdateSerializer']
