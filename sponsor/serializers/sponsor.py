@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.db.models import Sum
 from sponsor.models.sponsor import Sponsor
 
 
@@ -50,8 +51,12 @@ class SponsorListSerializer(serializers.ModelSerializer):
             'payment_amount',
             'created_datetime',
             'sponsor_status'
-            # spent_money
         ]
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['spent_money'] = instance.payment_of.aggregate(spent_money=Sum('given_money')).get('spent_money')
+        return representation
 
 
 __all__ = ['NewSponsorSerializer', 'SponsorProfileSerializer', 'SponsorListSerializer', 'SponsorUpdateSerializer']

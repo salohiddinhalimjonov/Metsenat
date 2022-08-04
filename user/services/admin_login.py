@@ -6,7 +6,7 @@ from user.models import User
 
 def admin_login(**kwargs):
     try:
-        user = User.objects.get(username=kwargs['username'], is_staff=True)
+        user = User.objects.get(username=kwargs['username'], is_superuser=True)
         if user.check_password(kwargs['password']) is True:
             token, _ = Token.objects.get_or_create(user=user)
             return Response({"token": token.key}, status=status.HTTP_201_CREATED)
