@@ -18,6 +18,6 @@ class StudentViewSet(
     def get_queryset(self):
         return Student.objects.all()
 
-    def update(self, request):
+    def update(self, request, *args, **kwargs):
         self.serializer_class = StudentUpdateSerializer
-        return super(StudentViewSet, self).update(self, request)
+        return super(StudentViewSet, self).update(request, *args, **kwargs)

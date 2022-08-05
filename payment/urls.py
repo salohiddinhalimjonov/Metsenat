@@ -4,7 +4,7 @@ from payment.views.payment import PaymentViewSet
 from payment.views.statistics import StatisticsView, StudentSponsorCount
 
 router = DefaultRouter()
-router.register('', PaymentViewSet, basename='payment')
+router.register('main', PaymentViewSet, basename='payment')
 
 urlpatterns = [
     path('statistics/', StatisticsView.as_view()),

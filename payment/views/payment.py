@@ -13,7 +13,7 @@ class PaymentViewSet(GenericViewSet):
     serializer_class = PaymentSerializer
 
     def get_queryset(self):
-        return Payment.objects.exclude(sponsor__status_type=Sponsor.BEKOR)
+        return Payment.objects.exclude(sponsor__sponsor_type=Sponsor.BEKOR)
 
     def create(self, request):
         student_id = request.query_params.get('student_id')

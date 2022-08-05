@@ -5,8 +5,8 @@ from student.views.student import StudentViewSet
 from student.views.student_type import StudentTypeViewSet
 
 router = DefaultRouter()
-router.register('otm/', OTMViewSet, basename='otm')
-router.register('', StudentViewSet, basename='student')
+router.register('otm', OTMViewSet, basename='otm')
+router.register('main', StudentViewSet, basename='student')
 router.register('student_type', StudentTypeViewSet, basename='student_type')
 
 urlpatterns = [

@@ -10,4 +10,4 @@ class Payment(BaseModel):
     given_money = models.DecimalField(max_digits=21, decimal_places=2)
 
     def __str__(self):
-        return self.given_money
+        return str(self.given_money)

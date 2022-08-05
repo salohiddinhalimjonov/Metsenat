@@ -1,5 +1,7 @@
-from rest_framework import serializers
+from decimal import Decimal
 from django.db.models import Sum
+from django.db.models.functions import Coalesce
+from rest_framework import serializers
 from sponsor.models.sponsor import Sponsor
 
 
@@ -55,7 +57,8 @@ class SponsorListSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['spent_money'] = instance.payment_of.aggregate(spent_money=Sum('given_money')).get('spent_money')
+        representation['spent_money'] = instance.payments_of.aggregate(
+            spent_money=Coalesce(Sum('given_money'), Decimal(0))).get('spent_money')
         return representation
 
 

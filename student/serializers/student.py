@@ -1,4 +1,6 @@
+from decimal import Decimal
 from django.db.models import Sum
+from django.db.models.functions import Coalesce
 from rest_framework import serializers
 from student.models.student import Student
 
@@ -17,7 +19,8 @@ class StudentSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['recieved_money'] = instance.payment_of.aggregate(recieved_money=Sum('given_money')).get('recieved_money')
+        representation['recieved_money'] = instance.payments_for.aggregate(
+            recieved_money=Coalesce(Sum('given_money'), Decimal(0))).get('recieved_money')
         return representation
 
 

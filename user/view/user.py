@@ -9,5 +9,5 @@ class UserMeView(APIView):
 
     def get(self, request):
         user = request.user
-        serializer = UserMiniSerializer(data=user)
+        serializer = UserMiniSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
