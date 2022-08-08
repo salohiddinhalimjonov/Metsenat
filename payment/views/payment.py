@@ -6,7 +6,7 @@ from payment.models.payment import Payment
 from student.models.student import Student
 from sponsor.models.sponsor import Sponsor
 from payment.serializers.payment import PaymentSerializer
-from payment.services.create_or_update_payment import create_or_update_payment
+from payment.services.create_or_update_payment import create_or_update_payment, update
 
 
 class PaymentViewSet(GenericViewSet):
@@ -28,7 +28,7 @@ class PaymentViewSet(GenericViewSet):
         obj = self.get_object()
         serializer = self.serializer_class(instance=obj, data=request.data)
         serializer.is_valid(raise_exception=True)
-        return create_or_update_payment(student, serializer)
+        return update(student, serializer)
 
     def list(self, request):
         student_id = request.query_params.get('student_id')
